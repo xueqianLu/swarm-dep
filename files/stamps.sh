@@ -8,6 +8,6 @@ do
 	apiport=$(($bapiport + $i*3))
 	p2pport=$(($bp2pport + $i*3))
 	debugport=$(($bdbgport + $i*3))
-	stamps=`curl -s http://localhost:${apiport}/stamps`
+	stamps=`curl -s http://${public_ip}:${apiport}/stamps`
 	echo "node $i $stamps"
 done
