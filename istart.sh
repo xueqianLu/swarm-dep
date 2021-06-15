@@ -24,9 +24,10 @@ do
 		--p2p-addr 0.0.0.0:$p2pport \
 		--api-addr 0.0.0.0:$apiport \
 		--debug-api-addr 0.0.0.0:$debugport \
-		--nat-addr 110.188.25.40:$p2pport \
-		--welcome-message="kt swarm pool $groups node $idx" \
+		--nat-addr $pubip:$p2pport \
+		--welcome-message="swarm pool $groups node $idx" \
 		--verbosity 5 \
+		--swap-endpoint $swap_endpoint \
 		--config /home/bee/.bee/bee.yaml
 done
 
