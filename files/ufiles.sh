@@ -6,7 +6,7 @@ FILESIZE=${3:-1000}
 
 apiport=$(($bapiport + $nodeidx*3))
 
-batchid=`curl http://${public_ip}:$apiport/stamps | jq -r .stamps[0].batchID`
+batchid=`curl http://${pubip}:$apiport/stamps | jq -r .stamps[0].batchID`
 if [ "$batchid" == "" ];then
 	echo "node_$nodeidx have no batchid, exited"
 	exit
@@ -20,10 +20,10 @@ genfiles -n $FILENUM -s $FILESIZE -p $prefix
 for f in $(seq 0 $FILENUM)
 do
 	File="${prefix}_random_$f.txt"
-	curl -s -F file=@$File -H "Swarm-Postage-Batch-Id: $batchid" -H "Content-Type: text/plain" -v http://${public_ip}:$apiport/bzz >> upload_node_$nodeidx.log 2>&1
+	curl -s -F file=@$File -H "Swarm-Postage-Batch-Id: $batchid" -H "Content-Type: text/plain" -v http://${pubip}:$apiport/bzz >> upload_node_$nodeidx.log 2>&1
 done
 
 grep "< Swarm-Tag" ./upload_node_$nodeidx.log > tags_node_$nodeidx.log
 
-curl -s http://${public_ip}:$apiport/stamps
+curl -s http://${pubip}:$apiport/stamps
 rm ${prefix}*.txt
