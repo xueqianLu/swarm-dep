@@ -4,7 +4,7 @@ nodeidx=${1:-0}
 FILENUM=${2:-100}
 FILESIZE=${3:-1000}
 
-apiport=$(($bapiport + $nodeidx*3))
+apiport=$(($bapiport + $nodeidx - 1))
 
 batchid=`curl http://${pubip}:$apiport/stamps | jq -r .stamps[0].batchID`
 if [ "$batchid" == "" ];then
