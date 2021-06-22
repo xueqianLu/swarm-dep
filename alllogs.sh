@@ -7,5 +7,5 @@ for i in $(seq 1 $N)
 do
 	containname="bee-$groups-node-$i"
 	echo $containname
-	docker logs $containname > $containname.log
+	docker logs $containname > logs/$containname.log
 done
